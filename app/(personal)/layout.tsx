@@ -62,7 +62,7 @@ export default async function PersonalWebsiteLayout({children}: {children: React
         <div className="mt-20 flex-grow px-4 md:px-16 lg:px-32">{children}</div>
         <Footer />
         <Suspense>
-          <IntroTemplate />
+    
         </Suspense>
       </div>
       <Toaster />
