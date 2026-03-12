@@ -29,7 +29,7 @@ export default function ImageBox({
     >
       {imageUrl && (
         <Image
-          className="absolute h-full w-full"
+          className="absolute h-full w-full grayscale transition-all duration-300 hover:grayscale-0"
           alt={alt}
           width={width}
           height={height}
