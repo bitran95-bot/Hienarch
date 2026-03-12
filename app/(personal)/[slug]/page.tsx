@@ -17,10 +17,18 @@ type Props = {
 }
 
 export async function generateStaticParams() {
-  return sanityFetchStaticParams({
+  const slugs = await sanityFetchStaticParams({
     query: slugsByTypeQuery,
     params: {type: 'page'},
   })
+
+  // ĐOẠN CODE THÊM VÀO ĐỂ SỬA LỖI:
+  // Nếu chưa có trang nào, trả về 1 trang 'demo' mặc định để Vercel không báo lỗi
+  if (!slugs || slugs.length === 0) {
+    return [{slug: 'demo'}]
+  }
+
+  return slugs
 }
 
 const pagesBySlugQuery = defineQuery(`
