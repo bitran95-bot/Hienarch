@@ -1,6 +1,5 @@
 import '@/styles/index.css'
 import {FallbackNavbar, Navbar} from '@/components/Navbar'
-import IntroTemplate from '@/intro-template'
 import {isPreviewMode, sanityFetchMetadata, SanityLive} from '@/sanity/lib/live'
 import {urlForOpenGraphImage} from '@/sanity/lib/utils'
 import type {Metadata, Viewport} from 'next'
