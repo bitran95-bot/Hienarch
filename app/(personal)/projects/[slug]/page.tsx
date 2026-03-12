@@ -41,10 +41,17 @@ export async function generateMetadata(
 }
 
 export async function generateStaticParams() {
-  return await sanityFetchStaticParams({
+  const slugs = await sanityFetchStaticParams({
     query: slugsByTypeQuery,
     params: {type: 'project'},
   })
+
+  // ĐOẠN CODE ĐÃ ĐƯỢC THÊM VÀO ĐỂ SỬA LỖI
+  if (!slugs || slugs.length === 0) {
+    return [{slug: 'demo'}]
+  }
+
+  return slugs
 }
 
 export default function ProjectSlugRoute({params}: Props) {
