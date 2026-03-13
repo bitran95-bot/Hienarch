@@ -112,24 +112,43 @@ async function ProjectSlugRouteContent({params}: Props) {
         description={overview}
       />
 
-      <div className="rounded-md border">
-        {/* Image  */}
-        <ImageBox
-          data-sanity={dataAttribute?.('coverImage')}
-          image={coverImage as any}
-          // @TODO add alt field in schema
-          alt=""
-          classesWrapper="relative aspect-[16/9]"
-        />
+      {/* Tags as category labels */}
+      {tags && tags.length > 0 && (
+        <div className="flex flex-row flex-wrap gap-2">
+          {tags.map((tag, key) => (
+            <span
+              key={key}
+              className="font-mono text-xs uppercase tracking-widest text-gray-500"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
 
+      {/* Cover Image with grayscale effect and hover transition */}
+      <div className="rounded-md border">
+        <div className="overflow-hidden">
+          <ImageBox
+            data-sanity={dataAttribute?.('coverImage')}
+            image={coverImage as any}
+            alt={title ? `Cover image for ${title}` : ''}
+            classesWrapper="relative aspect-[16/9]"
+            classesImage="object-cover grayscale brightness-110 contrast-125 transition-all duration-1000 hover:grayscale-0 hover:scale-105"
+          />
+        </div>
+
+        {/* Metadata Grid */}
         <div className="divide-inherit grid grid-cols-1 divide-y lg:grid-cols-4 lg:divide-x lg:divide-y-0">
           {/* Duration */}
           {!!(startYear && endYear) && (
             <div className="p-3 lg:p-4">
-              <div className="text-xs md:text-sm">Duration</div>
-              <div className="text-md md:text-lg">
+              <div className="font-mono text-xs uppercase tracking-wider text-gray-400">
+                Duration
+              </div>
+              <div className="text-md font-mono md:text-lg">
                 <span data-sanity={dataAttribute?.('duration.start')}>{startYear}</span>
-                {' - '}
+                {' — '}
                 <span data-sanity={dataAttribute?.('duration.end')}>{endYear}</span>
               </div>
             </div>
@@ -138,7 +157,9 @@ async function ProjectSlugRouteContent({params}: Props) {
           {/* Client */}
           {client && (
             <div className="p-3 lg:p-4">
-              <div className="text-xs md:text-sm">Client</div>
+              <div className="font-mono text-xs uppercase tracking-wider text-gray-400">
+                Client
+              </div>
               <div className="text-md md:text-lg">{client}</div>
             </div>
           )}
@@ -146,9 +167,13 @@ async function ProjectSlugRouteContent({params}: Props) {
           {/* Site */}
           {site && (
             <div className="p-3 lg:p-4">
-              <div className="text-xs md:text-sm">Site</div>
+              <div className="font-mono text-xs uppercase tracking-wider text-gray-400">Site</div>
               {site && (
-                <Link target="_blank" className="text-md break-words md:text-lg" href={site}>
+                <Link
+                  target="_blank"
+                  className="text-md break-words underline transition hover:opacity-50 md:text-lg"
+                  href={site}
+                >
                   {site}
                 </Link>
               )}
@@ -157,7 +182,7 @@ async function ProjectSlugRouteContent({params}: Props) {
 
           {/* Tags */}
           <div className="p-3 lg:p-4">
-            <div className="text-xs md:text-sm">Tags</div>
+            <div className="font-mono text-xs uppercase tracking-wider text-gray-400">Tags</div>
             <div className="text-md flex flex-row flex-wrap md:text-lg">
               {tags?.map((tag, key) => (
                 <div key={key} className="mr-1 break-words">
