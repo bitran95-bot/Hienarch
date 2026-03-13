@@ -134,7 +134,7 @@ async function ProjectSlugRouteContent({params}: Props) {
             image={coverImage as any}
             alt={title ? `Cover image for ${title}` : ''}
             classesWrapper="relative aspect-[16/9]"
-            classesImage="object-cover grayscale brightness-110 contrast-125 transition-all duration-1000 hover:grayscale-0 hover:scale-105"
+            classesImage="object-cover grayscale brightness-110 contrast-125 transition-[filter,transform] duration-1000 hover:grayscale-0 hover:scale-105"
           />
         </div>
 
@@ -146,7 +146,7 @@ async function ProjectSlugRouteContent({params}: Props) {
               <div className="font-mono text-xs uppercase tracking-wider text-gray-400">
                 Duration
               </div>
-              <div className="text-md font-mono md:text-lg">
+              <div className="text-md md:text-lg">
                 <span data-sanity={dataAttribute?.('duration.start')}>{startYear}</span>
                 {' — '}
                 <span data-sanity={dataAttribute?.('duration.end')}>{endYear}</span>
